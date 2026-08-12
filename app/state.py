@@ -1,13 +1,12 @@
 from typing import List, Dict, Any, TypedDict, Literal
 from pydantic import BaseModel, Field
 
-class GraphState(TypedDict):
+class GraphState(TypedDict, total=False):
     question: str
     search_query: str
     documents: List[Dict[str, Any]]
     grade: Literal["SUFFICIENT" , "INSUFFICIENT" , "NOT_FOUND"] 
     grade_reason: str
-    rewrite_query: str
     retry_count: int
     answer: str
     citations: List[str]
@@ -24,6 +23,6 @@ class AskQuestion(BaseModel):
 
 class AskResponse(BaseModel):
     answer: str
-    ciatation: List[str]
+    citations: List[str]
     trace: Dict[str, Any]
 
