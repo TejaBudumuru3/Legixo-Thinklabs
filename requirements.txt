@@ -1,0 +1,7 @@
+pinecone
+google-genai
+langgraph
+fastapi 
+uvicorn
+pydantic
+python-dotenv
