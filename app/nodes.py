@@ -1,7 +1,7 @@
 from config import ai_client, groq_client
 from google.genai import types
 from app.pinecone_client import query_index
-from app.state import GraphState, GradeDocumentsOutput
+from app.state import GraphState, GradeDocumentsOutput, GenerateAnswerOutput
 from app.prompts import GRADER_PROMPT, ANSWER_PROMPT
 
 groq_model = "llama-3.3-70b-versatile"
@@ -9,18 +9,26 @@ groq_model = "llama-3.3-70b-versatile"
 def retrieval(state: GraphState) -> dict:
     query_to_embed = state.get("search_query") or state.get("question")
     print("converting query into embeddings using gemini")
-    result = ai_client.models.embed_content(
-        model='gemini-embedding-001',
-        contents=query_to_embed,
-        config=types.EmbedContentConfig(output_dimensionality=768, task_type='RETRIEVAL_QUERY')
-    )
+    try:
+        result = ai_client.models.embed_content(
+            model='gemini-embedding-001',
+            contents=query_to_embed,
+            config=types.EmbedContentConfig(output_dimensionality=768, task_type='RETRIEVAL_QUERY')
+        )
+    except Exception as e:
+        print(f"Embedding failed: {e}")
+        return { "documents": [] }
 
     if result.embeddings:
         embeddings = result.embeddings[0].values
         if embeddings:
             existing_docs = state.get('documents',[])
+            try:
+                new_docs = query_index(embeddings)
+            except Exception as e:
+                print(f"Query index failed: {e}")
+                new_docs = []
 
-            new_docs = query_index(embeddings)
             all_docs = existing_docs + new_docs
             unique_docs = {}
             for doc in all_docs:
@@ -50,7 +58,7 @@ def grade_documents(state: GraphState):
     if retries >=3:
         return {
             "grade": "NOT_FOUND",
-            "grade_reason": "No documents returned from Pinecone.",
+            "grade_reason": "Retries exhausted without a sufficient match.",
             "answer": "The provided documents do not contain sufficient information to answer this question.",
             "citations": []
         }
@@ -93,7 +101,7 @@ def grade_documents(state: GraphState):
 def generate_answer(state: GraphState):
     question = state.get("question", "")
     documents = state.get("documents", [])
-    context = "\n\n".join([doc['metadata']['text'] for doc in documents])
+    context = "\n\n".join([f"Source: {doc['metadata']['source']}\n{doc['metadata']['text']}" for doc in documents])
 
     citation = list(set([doc['metadata']['source'] for doc in documents]))
 
@@ -104,12 +112,20 @@ def generate_answer(state: GraphState):
         messages=[{
             "role": "user",
             "content": prompt
-        }]
+        }],
+        temperature=0.0,
+        response_format={
+            "type": "json_object",
+        }
     )
 
-    answer = res.choices[0].message.content
+    raw_json_string = res.choices[0].message.content
+    parsed_answer = GenerateAnswerOutput.model_validate_json(raw_json_string) # type: ignore
+
+    retrieved_sources = {doc['metadata']['source'] for doc in documents}
+    valid_citations = [f for f in parsed_answer.cited_files if f in retrieved_sources]
 
     return {
-        "answer": answer,
-        "citations": citation
+        "answer": parsed_answer.answer,
+        "citations": valid_citations
     }

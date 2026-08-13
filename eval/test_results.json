@@ -14,11 +14,9 @@
       "02_employment_agreement_excerpt.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "To determine the notice period when Bluecrest or Priya Nambiar ends the employment agreement, we refer to the \"Notice period\" section of the Employment agreement excerpt. It states that \"Either party may end this agreement by giving **60 days** written notice.\" \n\nThe key points regarding the notice period are:\n* The notice period is **60 days**.\n* The notice must be in writing.\n* During the notice period, \"the employee must hand over all laptops, badges, and source code access.\"\n\nThis notice period applies to both Bluecrest (the employer) and Priya Nambiar (the employee) when either party decides to end the employment agreement.",
+    "actual_answer": "The notice period that applies when Bluecrest or Priya Nambiar ends the employment agreement is \"60 days\" written notice.",
     "actual_citations": [
-      "02_employment_agreement_excerpt.md",
-      "06_property_lease_clause.md",
-      "05_counsel_notes_settlement.md"
+      "02_employment_agreement_excerpt.md"
     ],
     "pass_fail": "",
     "notes": "",
@@ -41,10 +39,9 @@
       "02_employment_agreement_excerpt.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "The non-compete clause applies for **\"12 months\"** after leaving Bluecrest. According to the \"Non-compete\" section, this period starts after the employee has left the company and prohibits them from working for a **\"direct competitor in the same city where Bluecrest has an office\"**, specifically if the new role uses the same client list supplied by Bluecrest.\n\nKey conditions for the non-compete to apply include:\n* The competitor must be a **\"direct competitor\"**\n* The new role must be **\"in the same city where Bluecrest has an office\"**\n* The new role must use the **\"same client list supplied by Bluecrest\"**\n\nThe provided documents do not specify when the non-compete clause starts being counted from, but it is mentioned that either party may end the agreement by giving **\"60 days\"** written notice, during which the employee must hand over all company materials. However, the direct link between the notice period and the start of the non-compete period is not explicitly stated.",
+    "actual_answer": "The non-compete period after leaving Bluecrest is for **12 months**, during which the employee may not work for a direct competitor in the same city where Bluecrest has an office, if the new role uses the same client list supplied by Bluecrest.",
     "actual_citations": [
-      "02_employment_agreement_excerpt.md",
-      "06_property_lease_clause.md"
+      "02_employment_agreement_excerpt.md"
     ],
     "pass_fail": "",
     "notes": "",
@@ -67,10 +64,9 @@
       "02_employment_agreement_excerpt.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "According to the provided context documents, specifically the \"Confidentiality\" section, confidential information includes:\n* \"pricing sheets\"\n* \"unreleased product roadmaps\"\n* \"customer names marked 'confidential' in writing\"\n\nThese are the types of information explicitly stated as confidential in the Bluecrest excerpt.",
+    "actual_answer": "Confidential information includes \"pricing sheets\", \"unreleased product roadmaps\", and \"customer names marked 'confidential' in writing\".",
     "actual_citations": [
-      "02_employment_agreement_excerpt.md",
-      "06_property_lease_clause.md"
+      "02_employment_agreement_excerpt.md"
     ],
     "pass_fail": "",
     "notes": "",
@@ -97,11 +93,16 @@
       "01_matter_memo_arvind_v_northfield.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "The civil suit number is CV-2024-8812, and the parties in the transport invoice dispute memo are Arvind Mehta (the plaintiff) and Northfield Logistics Pvt. Ltd. (the defendant).",
+    "actual_citations": [
+      "01_matter_memo_arvind_v_northfield.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 5,
@@ -115,11 +116,16 @@
       "01_matter_memo_arvind_v_northfield.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "Under the memo, the limitation period that applies to contract claims under the fictional Riverside Code is three years from the breach date.",
+    "actual_citations": [
+      "01_matter_memo_arvind_v_northfield.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 6,
@@ -135,11 +141,17 @@
       "01_matter_memo_arvind_v_northfield.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "The next hearing in Arvind Mehta v. Northfield is scheduled for 15 August 2025, and it is scheduled for the witness for the plaintiff (billing head).",
+    "actual_citations": [
+      "01_matter_memo_arvind_v_northfield.md",
+      "03_hearing_notice_template.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 7,
@@ -154,11 +166,16 @@
       "03_hearing_notice_template.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "Parties must file written arguments **seven clear days** before the listed date.",
+    "actual_citations": [
+      "03_hearing_notice_template.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 8,
@@ -173,11 +190,17 @@
       "03_hearing_notice_template.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "Case CV-2024-8812 is listed for 11:00 a.m. and is for arguments on 'invoice set-off' in the matter of Arvind Mehta v. Northfield Logistics.",
+    "actual_citations": [
+      "03_hearing_notice_template.md",
+      "01_matter_memo_arvind_v_northfield.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 9,
@@ -193,11 +216,16 @@
       "03_hearing_notice_template.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "Case CV-2023-4401 (Lakeview Society v. City Water Board) was adjourned. The next date is 22 September 2025.",
+    "actual_citations": [
+      "03_hearing_notice_template.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 10,
@@ -212,11 +240,16 @@
       "04_statute_style_excerpt_fictional.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "For commercial suits above five lakh fictional rupees, **Section 14 \u2014 Mediation before trial** states that such suits \"must go to **mandatory mediation** for 30 days unless both parties waive in writing\".",
+    "actual_citations": [
+      "04_statute_style_excerpt_fictional.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 11,
@@ -231,11 +264,16 @@
       "04_statute_style_excerpt_fictional.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "If a contract fixes no interest rate, simple interest at \"9% per year\" may be awarded on admitted dues from the date of demand until payment under \"Section 22 \u2014 Interest on delayed payments\".",
+    "actual_citations": [
+      "04_statute_style_excerpt_fictional.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 12,
@@ -252,11 +290,16 @@
       "05_counsel_notes_settlement.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "Northfield offered to pay \"70% of open invoices\" if Arvind drops the damage counterclaim. The client gave a counter-instruction to counter at \"85%\" and keep the witness for the next hearing if no agreement is reached by 1 August 2025.",
+    "actual_citations": [
+      "05_counsel_notes_settlement.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 13,
@@ -270,11 +313,16 @@
       "05_counsel_notes_settlement.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "The settlement talks described in the counsel notes are \"without prejudice\" unless a signed term sheet exists, meaning they are not binding. The reminder is that settlement talks are \"without prejudice\" unless a signed term sheet exists.",
+    "actual_citations": [
+      "05_counsel_notes_settlement.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 14,
@@ -289,11 +337,16 @@
       "06_property_lease_clause.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "The lessor for Unit 4B at Harbor View Tower is Kiran Patel, and the lessee is Harbor Bean Roasters OPC. The monthly rent is \u20b945,000.",
+    "actual_citations": [
+      "06_property_lease_clause.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 15,
@@ -308,11 +361,16 @@
       "06_property_lease_clause.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "The security deposit amount is \u20b91,35,000 (three months\u2019 rent), and it must be refunded within 45 days of handover if no damage beyond normal wear.",
+    "actual_citations": [
+      "06_property_lease_clause.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 16,
@@ -327,11 +385,16 @@
       "06_property_lease_clause.md"
     ],
     "execution_path": "direct_match",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "Subletting is **not allowed** for the Harbor View lease without written consent of the lessor.",
+    "actual_citations": [
+      "06_property_lease_clause.md"
+    ],
     "pass_fail": "",
     "notes": "",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 17,
@@ -348,11 +411,18 @@
       "05_counsel_notes_settlement.md"
     ],
     "execution_path": "direct_match_multi_source",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "The provided documents do not contain sufficient information to answer the question about the next hearing date. However, a settlement offer was made by Northfield to pay \"70% of open invoices\" if Arvind drops the \"damage counterclaim\". Arvind's counter offer is \"85%\" and to keep a witness for the next hearing if no agreement by 1 August 2025.",
+    "actual_citations": [
+      "05_counsel_notes_settlement.md",
+      "01_matter_memo_arvind_v_northfield.md",
+      "03_hearing_notice_template.md"
+    ],
     "pass_fail": "",
     "notes": "Tests cross-document retrieval and multi-file citation",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": 18,
@@ -369,11 +439,17 @@
       "01_matter_memo_arvind_v_northfield.md"
     ],
     "execution_path": "may_trigger_rewrite",
-    "actual_answer": "",
-    "actual_citations": [],
+    "actual_answer": "According to the \"Riverside Commercial Courts Act\" excerpt in 04_statute_style_excerpt_fictional.md, a commercial suit above five lakh fictional rupees must go to \"mandatory mediation\" for 30 days unless both parties waive in writing. The Arvind Mehta v. Northfield Logistics case involves unpaid invoices for transport services, but the total amount is not specified in the provided documents. If the amount exceeds five lakh fictional rupees, the \"mandatory mediation\" requirement could apply. Key points regarding mediation in this context include: \n* The suit must be above five lakh fictional rupees to require \"mandatory mediation\". \n* Mediation is required for 30 days. \n* Both parties can waive \"mandatory mediation\" in writing.",
+    "actual_citations": [
+      "04_statute_style_excerpt_fictional.md",
+      "01_matter_memo_arvind_v_northfield.md"
+    ],
     "pass_fail": "",
     "notes": "Ambiguous phrasing may trigger rewrite loop \u00e2\u20ac\u201d tests graph branching",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "SUFFICIENT",
+      "retries": 0
+    }
   },
   {
     "id": "O1",
@@ -382,11 +458,14 @@
     "expected_behavior": "refuse_or_not_found",
     "expected_source_files": [],
     "execution_path": "not_found_immediate",
-    "actual_answer": "",
+    "actual_answer": "The provided documents do not contain sufficient information to answer this question.",
     "actual_citations": [],
     "pass_fail": "",
     "notes": "Should return fallback \u00e2\u20ac\u201d no corpus info about population",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "NOT_FOUND",
+      "retries": 0
+    }
   },
   {
     "id": "O2",
@@ -399,7 +478,10 @@
     "actual_citations": [],
     "pass_fail": "",
     "notes": "Tricky \u00e2\u20ac\u201d corpus mentions non-compete but no penalty. Must NOT hallucinate a penalty amount",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "INSUFFICIENT",
+      "retries": 3
+    }
   },
   {
     "id": "O3",
@@ -412,7 +494,10 @@
     "actual_citations": [],
     "pass_fail": "",
     "notes": "Corpus mentions the case but not the outcome. Tests grounding \u00e2\u20ac\u201d must refuse, not invent",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "INSUFFICIENT",
+      "retries": 3
+    }
   },
   {
     "id": "E1",
@@ -421,11 +506,14 @@
     "expected_behavior": "refuse_or_validation_error",
     "expected_source_files": [],
     "execution_path": "validation_or_not_found",
-    "actual_answer": "",
+    "actual_answer": "The provided documents do not contain sufficient information to answer this question.",
     "actual_citations": [],
     "pass_fail": "",
     "notes": "Tests min_length validation or graceful refusal for non-question input",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "NOT_FOUND",
+      "retries": 0
+    }
   },
   {
     "id": "E2",
@@ -445,6 +533,9 @@
     "actual_citations": [],
     "pass_fail": "",
     "notes": "Broad query \u00e2\u20ac\u201d tests how system handles when all chunks are relevant",
-    "error": "429 Client Error: Too Many Requests for url: http://127.0.0.1:8000/ask"
+    "trace": {
+      "final_grade": "INSUFFICIENT",
+      "retries": 3
+    }
   }
 ]

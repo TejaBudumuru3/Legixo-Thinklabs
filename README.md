@@ -22,13 +22,19 @@ Legixo Thinklabs is an intelligent legal document research assistant built with 
 ```
 User Query → FastAPI (/ask) → LangGraph Engine:
    │
-   ├── 1. retrieval: Embed query via Gemini → Search Pinecone (top_k=3)
+   ├── 1. retrieval: Embed query via Gemini → Search Pinecone (top_k=5)
    │
    ├── 2. grade: Grade chunk relevance via Groq LLM (JSON Mode)
    │      ├── SUFFICIENT ──→ 3. answer: Synthesize answer & citations → Return
    │      ├── INSUFFICIENT ─→ Rewrite search query (max 3 retries) ──→ Loop to 1
    │      └── NOT_FOUND ────→ Return graceful refusal message → END
 ```
+
+### Design Decisions
+
+**Why multiple LLM calls?** The requirement for a graph-based workflow with looping/branching inherently requires decoupled steps. The system first grades chunks (1 call) and only synthesizes an answer (1 call) if the grade is sufficient. This separates evaluation from generation, ensuring no hallucinated answers slip through. 
+
+**Isn't this expensive?** The cost is structurally bounded by a strict `MAX_RETRIES = 3` limit. Additionally, the expensive retry loop (generating a rewritten query and re-embedding) only triggers when the initial semantic search fails, meaning easy questions resolve cheaply and hard questions receive proportional effort.
 
 ---
 
@@ -138,7 +144,7 @@ Results will be saved to `eval/test_results.json`.
 
 ---
 
-##  Project Structure
+## 📁 Project Structure
 
 ```
 Legixo-Thinklabs/

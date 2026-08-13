@@ -18,6 +18,11 @@ class GradeDocumentsOutput(BaseModel):
     reason: str = Field(description="Brief explanation for the grade.")
     rewrite_query: str = Field(description="If grade is 'insufficient', a rephrased search query optimized for vector search. Otherwise empty.")
 
+class GenerateAnswerOutput(BaseModel):
+    model_config = {"extra": "forbid"}
+    answer: str = Field(description="The synthesized answer to the user's question.")
+    cited_files: List[str] = Field(description="List of source filenames used to construct the answer.")
+
 class AskQuestion(BaseModel):
     question: str
 

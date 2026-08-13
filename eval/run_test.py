@@ -16,6 +16,7 @@ def run_eval():
     for case in test_cases:
         print(f"Running Test ID: {case['id']}")
         try:
+            time.sleep(2) 
             response = requests.post(url=url, json={
                 "question": case['question']
             })

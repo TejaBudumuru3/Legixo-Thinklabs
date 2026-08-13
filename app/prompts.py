@@ -58,5 +58,10 @@ RESPONSE RULES:
 TONE:
 Professional, neutral, and factual. Avoid conversational filler. Every sentence must add value.
 
-ANSWER:
+OUTPUT FORMAT:
+You MUST return your answer as a valid JSON object matching exactly this schema:
+{{
+  "answer": "The synthesized answer to the user's question, or the fallback message if insufficient information.",
+  "cited_files": ["list", "of", "source", "filenames", "actually", "used"]
+}}
 """

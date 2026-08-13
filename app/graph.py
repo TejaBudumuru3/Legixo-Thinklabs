@@ -6,10 +6,11 @@ graph = StateGraph(GraphState)
 
 def condition_for_route(state: GraphState):
     grade = state.get('grade', '') 
+    retries = state.get('retry_count', 0)
 
     if grade == 'SUFFICIENT':
         return 'answer'
-    elif grade == 'INSUFFICIENT':
+    elif grade == 'INSUFFICIENT' and retries < 3:
         return 'retrieval'
     else: 
         return END
