@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legixo Thinklabs — AI Legal Document Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #18181b;
+            color: #e2e8f0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 900px;
+            height: 94vh;
+            background: #18181b;
+            border-radius: 12px;
+            border: 1px solid #27272a;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        header {
+            padding: 16px 24px;
+            background: #18181b;
+            border-bottom: 1px solid #27272a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: #0f766e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #fff;
+        }
+        .brand-title h1 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #f8fafc;
+            letter-spacing: -0.3px;
+        }
+        .brand-title p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+        .badge {
+            font-size: 11px;
+            font-weight: 500;
+            padding: 4px 10px;
+            background: transparent;
+            color: #a1a1aa;
+            border: 1px solid #3f3f46;
+            border-radius: 20px;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            scroll-behavior: smooth;
+        }
+        .message {
+            display: flex;
+            flex-direction: column;
+            max-width: 82%;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message.user {
+            align-self: flex-end;
+        }
+        .message.assistant {
+            align-self: flex-start;
+        }
+        .bubble {
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 14.5px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .user .bubble {
+            background: #0d9488;
+            color: #ffffff;
+            border-bottom-right-radius: 4px;
+        }
+        .assistant .bubble {
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            color: #e4e4e7;
+            border-bottom-left-radius: 4px;
+        }
+        .citations {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+        }
+        .citations-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #64748b;
+            margin-right: 4px;
+        }
+        .citation-chip {
+            font-size: 11px;
+            font-weight: 500;
+            background: #27272a;
+            color: #2dd4bf;
+            border: 1px solid #3f3f46;
+            padding: 3px 8px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .meta-info {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 6px;
+            display: flex;
+            gap: 12px;
+        }
+        .suggestions {
+            padding: 0 24px 12px 24px;
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .suggestions::-webkit-scrollbar {
+            display: none;
+        }
+        .chip-btn {
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            color: #a1a1aa;
+            font-size: 12px;
+            padding: 7px 13px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .chip-btn:hover {
+            background: #27272a;
+            color: #e4e4e7;
+            border-color: #52525b;
+        }
+        .input-area {
+            padding: 16px 24px;
+            background: #18181b;
+            border-top: 1px solid #27272a;
+            display: flex;
+            gap: 12px;
+        }
+        input[type="text"] {
+            flex: 1;
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: #f8fafc;
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus {
+            border-color: #0d9488;
+        }
+        button.send-btn {
+            background: #0d9488;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        button.send-btn:hover {
+            opacity: 0.9;
+        }
+        button.send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: #27272a;
+            border: 1px solid #3f3f46;
+            border-radius: 12px;
+            width: fit-content;
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: #a1a1aa;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+        .error-bubble {
+            background: rgba(239, 68, 68, 0.12) !important;
+            border: 1px solid rgba(239, 68, 68, 0.3) !important;
+            color: #fca5a5 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <header>
+            <div class="brand">
+                <div class="brand-icon">L</div>
+                <div class="brand-title">
+                    <h1>Legixo Thinklabs</h1>
+                    <p>Agentic Legal Document Assistant</p>
+                </div>
+            </div>
+            <div class="badge">LangGraph + Groq + Pinecone</div>
+        </header>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="message assistant">
+                <div class="bubble">Welcome to Legixo Thinklabs. I am your specialized AI legal research assistant. 
+
+Ask me any question about your legal document corpus (matter memos, employment agreements, hearing notices, statutes, or lease terms).</div>
+            </div>
+        </div>
+
+        <div class="suggestions">
+            <button class="chip-btn" onclick="sendQuick('What notice period applies to Priya Nambiar at Bluecrest?')">📋 Employment Notice Period</button>
+            <button class="chip-btn" onclick="sendQuick('What mediation rules apply under Section 14?')">⚖️ Section 14 Mediation</button>
+            <button class="chip-btn" onclick="sendQuick('What is the monthly rent and security deposit for Unit 4B?')">🏢 Lease Terms</button>
+            <button class="chip-btn" onclick="sendQuick('What is the population of Riverside city?')">❓ Out-of-Corpus Test</button>
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ask a question about your legal documents..." onkeydown="if(event.key === 'Enter') sendMessage()">
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        function appendUserMessage(text) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message user';
+            msgDiv.innerHTML = `<div class="bubble">${escapeHtml(text)}</div>`;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function showTyping() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message assistant';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="typing-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            `;
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTyping() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+        }
+
+        function appendAssistantMessage(data) {
+            removeTyping();
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message assistant';
+
+            let citationsHtml = '';
+            if (data.citations && data.citations.length > 0) {
+                citationsHtml = `
+                    <div class="citations">
+                        <span class="citations-title">Sources:</span>
+                        ${data.citations.map(c => `<span class="citation-chip">📄 ${escapeHtml(c)}</span>`).join('')}
+                    </div>
+                `;
+            }
+
+            let traceHtml = '';
+            if (data.trace) {
+                const grade = data.trace.final_grade || 'N/A';
+                const retries = data.trace.retries !== undefined ? data.trace.retries : 0;
+                traceHtml = `
+                    <div class="meta-info">
+                        <span>Grade: <strong>${grade}</strong></span>
+                        <span>Retries: <strong>${retries}</strong></span>
+                    </div>
+                `;
+            }
+
+            msgDiv.innerHTML = `
+                <div class="bubble">${escapeHtml(data.answer)}</div>
+                ${citationsHtml}
+                ${traceHtml}
+            `;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function appendError(errorText) {
+            removeTyping();
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'message assistant';
+            msgDiv.innerHTML = `<div class="bubble error-bubble">⚠️ ${escapeHtml(errorText)}</div>`;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            appendUserMessage(text);
+            userInput.value = '';
+            userInput.disabled = true;
+            sendBtn.disabled = true;
+
+            showTyping();
+
+            try {
+                const response = await fetch('/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: text })
+                });
+
+                if (response.status === 429) {
+                    appendError('Rate limit exceeded (429). Too many requests to the LLM. Please wait a few seconds and try again.');
+                } else if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    appendError(errData.detail || `Server error (${response.status})`);
+                } else {
+                    const data = await response.json();
+                    appendAssistantMessage(data);
+                }
+            } catch (err) {
+                appendError('Network error: Could not reach the Legixo API server.');
+            } finally {
+                userInput.disabled = false;
+                sendBtn.disabled = false;
+                userInput.focus();
+            }
+        }
+
+        function sendQuick(questionText) {
+            userInput.value = questionText;
+            sendMessage();
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

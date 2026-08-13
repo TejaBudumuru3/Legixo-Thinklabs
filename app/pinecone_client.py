@@ -13,9 +13,9 @@ def upsert_vectors(vector_batch: list):
    
     index.upsert(vectors=vector_batch)
 
-def query_index(vector: list[float], top_k: int = 3):
+def query_index(vector: list[float], top_k: int = 5):
     if index is None:
-        raise RuntimeError("Cannot upsert: Index does not exist.")
+        raise RuntimeError("Cannot Query: Index does not exist.")
    
     result = index.query(vector=vector, top_k=top_k, include_metadata=True)
     return result.get("matches", [])

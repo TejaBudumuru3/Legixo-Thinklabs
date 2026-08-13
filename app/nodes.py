@@ -1,10 +1,12 @@
-from config import ai_client
+from config import ai_client, groq_client
 from google.genai import types
 from app.pinecone_client import query_index
 from app.state import GraphState, GradeDocumentsOutput
 from app.prompts import GRADER_PROMPT, ANSWER_PROMPT
 
-def retrival(state: GraphState) -> dict:
+groq_model = "llama-3.3-70b-versatile"
+
+def retrieval(state: GraphState) -> dict:
     query_to_embed = state.get("search_query") or state.get("question")
     print("converting query into embeddings using gemini")
     result = ai_client.models.embed_content(
@@ -12,13 +14,21 @@ def retrival(state: GraphState) -> dict:
         contents=query_to_embed,
         config=types.EmbedContentConfig(output_dimensionality=768, task_type='RETRIEVAL_QUERY')
     )
-    print("="*30)
-    print(result)
-    print("="*30)
+
     if result.embeddings:
         embeddings = result.embeddings[0].values
         if embeddings:
-            documents = query_index(embeddings)
+            existing_docs = state.get('documents',[])
+
+            new_docs = query_index(embeddings)
+            all_docs = existing_docs + new_docs
+            unique_docs = {}
+            for doc in all_docs:
+                unique_docs[doc['id']] = doc
+            
+            unique_docs_list = list(unique_docs.values())
+            unique_docs_list.sort(key=lambda x: x['score'], reverse=True)
+            documents = unique_docs_list[:5]
             if documents:
                 return { "documents": documents }
 
@@ -50,21 +60,21 @@ def grade_documents(state: GraphState):
 
     prompt = GRADER_PROMPT.format(question=question, context=context)
 
-    res = ai_client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            response_schema=GradeDocumentsOutput,
-            temperature=0.0
-        )
+
+    res = groq_client.chat.completions.create(
+        model = groq_model,
+        messages=[{
+            "role": "user",
+            "content": prompt
+        }],
+        temperature=0.0,
+        response_format={
+            "type": "json_object",
+        }
     )
 
-    print("="*30)
-    print(res)
-    print("="*30)
-    parsed_grade: GradeDocumentsOutput = res.parsed  # type: ignore
-
+    raw_json_string = res.choices[0].message.content
+    parsed_grade = GradeDocumentsOutput.model_validate_json(raw_json_string) # type: ignore
     update_dict: dict = {
         "grade": parsed_grade.grade,
         "grade_reason": parsed_grade.reason
@@ -81,23 +91,25 @@ def grade_documents(state: GraphState):
     return update_dict
 
 def generate_answer(state: GraphState):
-    question = state["question"]
-    documents = state["documents"]
+    question = state.get("question", "")
+    documents = state.get("documents", [])
     context = "\n\n".join([doc['metadata']['text'] for doc in documents])
 
     citation = list(set([doc['metadata']['source'] for doc in documents]))
 
     prompt = ANSWER_PROMPT.format(question=question, context= context)
 
-    res = ai_client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents=prompt
+    res = groq_client.chat.completions.create(
+        model= groq_model,
+        messages=[{
+            "role": "user",
+            "content": prompt
+        }]
     )
-    print("="*30)
-    print(res)
-    print("="*30)
+
+    answer = res.choices[0].message.content
 
     return {
-        "answer": res.text,
+        "answer": answer,
         "citations": citation
     }
