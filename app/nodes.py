@@ -4,7 +4,7 @@ from app.pinecone_client import query_index
 from app.state import GraphState, GradeDocumentsOutput, GenerateAnswerOutput
 from app.prompts import GRADER_PROMPT, ANSWER_PROMPT
 
-groq_model = "llama-3.3-70b-versatile"
+groq_model = "openai/gpt-oss-120b"
 
 def retrieval(state: GraphState) -> dict:
     query_to_embed = state.get("search_query") or state.get("question")

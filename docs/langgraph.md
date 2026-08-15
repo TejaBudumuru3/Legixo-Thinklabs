@@ -27,7 +27,7 @@ graph TD
 
 ### 2. `grade` Node
 - **Function:** `grade_documents(state: GraphState) -> dict`
-- **Purpose:** Uses Groq's `llama-3.3-70b-versatile` LLM in JSON Mode to evaluate whether retrieved document chunks contain sufficient information to answer the user's legal question.
+- **Purpose:** Uses Groq's `openai/gpt-oss-120b` LLM in JSON Mode to evaluate whether retrieved document chunks contain sufficient information to answer the user's legal question.
 - **Input Keys:** `documents`, `question`, `retry_count`
 - **Output Keys:**
   - `grade`: `"SUFFICIENT"`, `"INSUFFICIENT"`, or `"NOT_FOUND"`
@@ -38,7 +38,7 @@ graph TD
 
 ### 3. `answer` Node
 - **Function:** `generate_answer(state: GraphState) -> dict`
-- **Purpose:** Synthesizes a factual, grounded legal answer using ONLY the retrieved context documents via `llama-3.3-70b-versatile`. Extracts source citations from document metadata.
+- **Purpose:** Synthesizes a factual, grounded legal answer using ONLY the retrieved context documents via `openai/gpt-oss-120b`. Extracts source citations from document metadata.
 - **Input Keys:** `question`, `documents`
 - **Output Keys:** `answer`, `citations` (List of source filenames)
 - **Grounding Guarantee:** Instructed to refuse answering and return a fallback string if the context is insufficient, preventing hallucinations.

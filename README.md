@@ -1,6 +1,6 @@
 # Legixo Thinklabs — Legal Document Q&A API
 
-Legixo Thinklabs is an intelligent legal document research assistant built with **LangGraph**, **Pinecone**, **Google Gemini**, and **Groq (Llama 3.3)**. It provides a RESTful HTTP API for querying legal document corpora with high precision, automatic relevance grading, iterative query rewriting, and grounded citations.
+Legixo Thinklabs is an intelligent legal document research assistant built with **LangGraph**, **Pinecone**, **Google Gemini**, and **Groq (GPT OSS 120B)**. It provides a RESTful HTTP API for querying legal document corpora with high precision, automatic relevance grading, iterative query rewriting, and grounded citations.
 
 ---
 
@@ -11,7 +11,7 @@ Legixo Thinklabs is an intelligent legal document research assistant built with 
 | **Orchestration** | LangGraph (`StateGraph`) | Agentic graph workflow with conditional looping & retry bounds |
 | **Embeddings** | Gemini (`gemini-embedding-001`) | 768-dimensional text embeddings (`RETRIEVAL_DOCUMENT` / `RETRIEVAL_QUERY`) |
 | **Vector Database** | Pinecone | Serverless vector index (`legixo-corpus`, cosine similarity) |
-| **LLM Inference** | Groq (`llama-3.3-70b-versatile`) | Fast relevance grading (JSON Mode) & grounded answer generation |
+| **LLM Inference** | Groq (`openai/gpt-oss-120b`) | Fast relevance grading (JSON Mode) & grounded answer generation |
 | **API Server** | FastAPI & Uvicorn | Async REST API with `POST /ask` endpoint and error handling |
 | **Frontend** | Vanilla HTML / CSS / JS | Interactive dark-themed web chat UI |
 
